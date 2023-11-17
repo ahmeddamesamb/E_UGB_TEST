@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/book_yonn/auth")
+@RequestMapping("/api/auth")
 @CrossOrigin("*")
 @Log4j2
 public class PassagerController {

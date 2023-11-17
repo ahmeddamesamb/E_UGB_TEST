@@ -4,6 +4,7 @@ import br.com.security.dto.ReservationDto;
 import br.com.security.model.Reservation;
 import br.com.security.service.ReservationService;
 import br.com.security.service.mapper.ReservationMapStruct;
+import br.com.security.utils.Endpoints;
 import lombok.extern.log4j.Log4j2;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
@@ -14,7 +15,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/book_yonn/auth")
+@RequestMapping(Endpoints.URL_APP)
 @CrossOrigin("*")
 @Log4j2
 public class ReservationController {

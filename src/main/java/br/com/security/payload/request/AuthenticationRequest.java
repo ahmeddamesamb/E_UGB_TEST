@@ -1,4 +1,4 @@
-package br.com.security.auth;
+package br.com.security.payload.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

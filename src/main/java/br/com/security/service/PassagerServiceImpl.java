@@ -44,11 +44,7 @@ public class PassagerServiceImpl implements PassagerService{
             );
         passager.setNom(passagerRequest.getNom());
         passager.setEmail(passagerRequest.getEmail());
-        passager.setAdresse(passagerRequest.getAdresse());
-        passager.setImage(passagerRequest.getImage());
-        passager.setNaissance(passagerRequest.getNaissance());
         passager.setPassword(passagerRequest.getPassword());
-        passager.setPasswordConfirme(passagerRequest.getPasswordConfirme());
         passager.setTelephone(passagerRequest.getTelephone());
         return passagerRepository.save(passager);    }
 

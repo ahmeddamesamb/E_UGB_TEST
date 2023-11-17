@@ -1,5 +1,6 @@
-package br.com.security.auth;
+package br.com.security.payload.request;
 
+import br.com.security.model.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -9,7 +10,11 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class AuthenticationRequest {
+public class RegisterRequest {
+    private String nom;
     private String email;
     private String password;
+    private String telephone;
+    private Role role;
+
 }

@@ -27,21 +27,13 @@ public class User implements UserDetails  {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String passwordConfirme;
     @Column
     private String telephone;
     @Column
     private String nom;
     @Column
-    private String adresse;
-    @Column
-    private Date naissance;
-    @Column
-    private String image;
-    @Column
     private String email;
     @Column
-
     private String password;
     @OneToMany(
         mappedBy = "user",

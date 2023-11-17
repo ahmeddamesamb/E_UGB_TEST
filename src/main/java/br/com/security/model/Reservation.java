@@ -30,9 +30,9 @@ public class Reservation {
     @JoinColumn(name = "passager_id")
     private Passager passager;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+/*    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "conducteur_id")
-    private Conducteur conducteur;
+    private Conducteur conducteur;*/
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user")
