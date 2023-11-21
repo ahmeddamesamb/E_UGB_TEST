@@ -1,4 +1,5 @@
-package br.com.security.payload.request;
+package br.com.security.payload.request.authentification;
+
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -10,6 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AuthenticationRequest {
-    private String email;
+  
+    private String email;    
     private String password;
 }

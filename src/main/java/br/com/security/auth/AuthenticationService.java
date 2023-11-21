@@ -7,13 +7,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import br.com.security.config.JwtService;
-import br.com.security.model.Role;
+import br.com.security.model.ERole;
 import br.com.security.model.User;
 import br.com.security.repository.UserRepository;
 
 import lombok.RequiredArgsConstructor;
-
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -32,7 +30,7 @@ public class AuthenticationService {
         var user = User.builder()
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
-                .role(Role.USER)
+                .ERole(ERole.ADMIN)
                 .build();
         userRepository.save(user);
         var jwtToken = jwtService.generateToken(user);

@@ -1,4 +1,4 @@
-package br.com.security.payload.response;
+package br.com.security.payload.response.authentification;
 
 
 import br.com.security.model.User;

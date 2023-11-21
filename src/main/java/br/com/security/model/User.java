@@ -17,37 +17,41 @@ import lombok.NoArgsConstructor;
 
 @Data
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table
 @Inheritance(strategy = InheritanceType.JOINED)
 
 public class User implements UserDetails  {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column
     private String telephone;
     @Column
     private String nom;
     @Column
+    private String prenom;
+    @Column
+    private Date naissance;
+    @Column
     private String email;
     @Column
     private String password;
+    @Enumerated(EnumType.STRING)
+    private ERole ERole;
     @OneToMany(
         mappedBy = "user",
         cascade = CascadeType.ALL,
         orphanRemoval = true
     )
     private List<Reservation> reservationList=new ArrayList<>();
-
-    @Enumerated(EnumType.STRING)
-    private Role role;
+  
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(role.name()));
+        return List.of(new SimpleGrantedAuthority(ERole.name()));
     }
 
     @Override
