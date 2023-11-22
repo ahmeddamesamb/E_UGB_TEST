@@ -7,6 +7,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
 import java.util.List;
 
 @Data
@@ -19,6 +20,9 @@ public class Enseignant extends User{
     @Column
     private String identifiantEnseignant;
     private ESpecialite eSpecialite;
+
+    public Enseignant(Long id, String prenom, String nom, String email, String telephone, Date naissance, br.com.security.model.ERole eRole, ESpecialite eSpecialite, String identifiantEnseignant) {
+    }
 
 /*    @ManyToOne
     @JoinColumn(name = "universite_id")

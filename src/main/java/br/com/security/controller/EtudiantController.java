@@ -29,20 +29,19 @@ public class EtudiantController {
         return etudiantService.getAllEtudiants();
     }
     @GetMapping(Endpoints.URL_USER_ONE_ETUDIANT)
-    public Etudiant getUserById(@PathVariable Long id) {
+    public Etudiant getEtudiantById(@PathVariable Long id) {
         return etudiantService.getEtudiantById(id);
     } 
     @PostMapping(Endpoints.URL_ETUDIANT)
-    public EtudiantResponse createUser(@RequestBody Etudiant etudiant) {
+    public EtudiantResponse createEtudiant(@RequestBody Etudiant etudiant) {
         return etudiantService.createEtudiant(etudiant);
     }
     @DeleteMapping(Endpoints.URL_USER_ONE_ETUDIANT)
-    public ResponseEntity<Etudiant> deleteUser(@PathVariable(name = "id") Long id) {
-        etudiantService.deleteEtudiant(id);
-        return new ResponseEntity<>(HttpStatus.OK);
+    public EtudiantResponse deleteEtudiant(@PathVariable(name = "id") Long id) {
+        return etudiantService.deleteEtudiant(id);
     }
     @PutMapping(Endpoints.URL_USER_ONE_ETUDIANT)
-    public EtudiantResponse updateUser(@PathVariable Long id, @RequestBody Etudiant etudiant) {
+    public EtudiantResponse updateEtudiant(@PathVariable Long id, @RequestBody Etudiant etudiant) {
         return etudiantService.updateEtudiant(id,etudiant);
     }
 

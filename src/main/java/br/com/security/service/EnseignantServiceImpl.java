@@ -4,8 +4,11 @@ import br.com.security.model.ERole;
 import br.com.security.model.Enseignant;
 import br.com.security.model.Etudiant;
 import br.com.security.payload.request.enseignant.EnseignantRequest;
+import br.com.security.payload.response.enseignant.EnseignantResponse;
+import br.com.security.payload.response.etudiant.EtudiantResponse;
 import br.com.security.repository.EnseignantRepository;
 import br.com.security.utils.ESpecialite;
+import br.com.security.utils.Status;
 import br.com.security.utils.UtilsImpl;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -26,62 +29,73 @@ public class EnseignantServiceImpl implements EnseignantService{
     }
 
     @Override
-    public List<Enseignant> getAllEnseignant() {
+    public List<Enseignant> getAllEnseignants() {
         return enseignantRepository.findAll();
-    }
-    
-    @Override
-    public Enseignant createEnseignant(EnseignantRequest enseignantRequest) {
-        Enseignant nouvelEnseignant = new Enseignant();
-        nouvelEnseignant.setEmail(enseignantRequest.getEmail());
-        nouvelEnseignant.setNom(enseignantRequest.getNom());
-        nouvelEnseignant.setPrenom(enseignantRequest.getPrenom());
-        nouvelEnseignant.setERole(ERole.ENSEIGNAT);
-        nouvelEnseignant.setNaissance(enseignantRequest.getNaissance());
-        nouvelEnseignant.setTelephone(enseignantRequest.getTelephone());
-        nouvelEnseignant.setPassword(passwordEncoder.encode(enseignantRequest.getPassword()));
-        nouvelEnseignant.setIdentifiantEnseignant("E"+utils.generateCodePin());
-        nouvelEnseignant.setESpecialite(ESpecialite.CYBERSECURITY);
-        return enseignantRepository.save(nouvelEnseignant); 
-    }
-
-    @Override
-    public Enseignant updateEnseignant(long id, EnseignantRequest enseignantRequest) {
-        Enseignant enseignant = enseignantRepository
-            .findById(id)
-            .orElseThrow(() ->
-                new RuntimeException(
-                    "La tentative de mise a jour du user na pas aboutit"
-                )
-            );
-        enseignant.setNom(enseignantRequest.getNom());
-        enseignant.setPrenom(enseignantRequest.getPrenom());
-        enseignant.setNaissance(enseignantRequest.getNaissance());
-        enseignant.setEmail(enseignantRequest.getEmail());
-        enseignant.setPassword(passwordEncoder.encode(enseignantRequest.getPassword()));
-        enseignant.setTelephone(enseignantRequest.getTelephone());
-        enseignant.setERole(ERole.ENSEIGNAT);
-        enseignant.setIdentifiantEnseignant("E"+utils.generateCodePin());
-        enseignant .setESpecialite(ESpecialite.CYBERSECURITY);
-        return enseignantRepository.save(enseignant);
-    }
-
-    @Override
-    public void deleteEnseignant(long id) {
-        Enseignant enseignant = enseignantRepository.findById(id)
-            .orElseThrow(() -> new ResourceNotFoundException("l'user que vous tenter de supprimer n existe pas"));
-        enseignantRepository.delete(enseignant);
     }
 
     @Override
     public Enseignant getEnseignantById(long id) {
-
-        Optional<Enseignant> result = enseignantRepository.findById(id);
-        if (result.isPresent()) {
-            return result.get();
-        } else {
-            throw new ResourceNotFoundException("l'etudiant que vous checher n existe pas!!!");
+        var enseignantOptional= enseignantRepository.findById(id);
+        if (enseignantOptional.isPresent()){
+            var enseignant=enseignantOptional.get();
+            return new Enseignant(
+                enseignant.getId(),
+                enseignant.getPrenom(),
+                enseignant.getNom(),
+                enseignant.getEmail(),
+                enseignant.getTelephone(),
+                enseignant.getNaissance(),
+                enseignant.getERole(),
+                enseignant.getESpecialite(),
+                enseignant.getIdentifiantEnseignant()
+            );
+            
         }
+        return null;    }
+
+    @Override
+    public EnseignantResponse createEnseignant(Enseignant enseignant) {
+        Enseignant nouvelEnseignant = new Enseignant();
+        nouvelEnseignant.setEmail(enseignant.getEmail());
+        nouvelEnseignant.setNom(enseignant.getNom());
+        nouvelEnseignant.setPrenom(enseignant.getPrenom());
+        nouvelEnseignant.setERole(ERole.ENSEIGNAT);
+        nouvelEnseignant.setNaissance(enseignant.getNaissance());
+        nouvelEnseignant.setTelephone(enseignant.getTelephone());
+        nouvelEnseignant.setPassword(passwordEncoder.encode(enseignant.getPassword()));
+        nouvelEnseignant.setIdentifiantEnseignant("E"+utils.generateCodePin());
+        nouvelEnseignant.setESpecialite(ESpecialite.CYBERSECURITY);
+        enseignantRepository.save(enseignant);
+        return new EnseignantResponse(Status.OK);
     }
+
+    @Override
+    public EnseignantResponse updateEnseignant(long id, Enseignant enseignant) {
+        var enseignantOptional = enseignantRepository.findById(id);
+        if (enseignantOptional.isPresent()){
+            var enseignantRes = enseignantOptional.get();
+            enseignantRes.setPrenom(enseignant.getPrenom());
+            enseignantRes.setNom(enseignant.getNom());
+            enseignantRes.setESpecialite(enseignant.getESpecialite());
+            enseignantRes.setIdentifiantEnseignant(enseignantRes.getIdentifiantEnseignant());
+            enseignantRes.setTelephone(enseignant.getTelephone());
+            enseignantRes.setNaissance(enseignant.getNaissance());
+            enseignantRes.setERole(enseignant.getERole());
+            enseignantRes.setEmail(enseignant.getEmail());
+            enseignantRepository.save(enseignantRes);
+            return new EnseignantResponse(Status.OK);
+        }
+        return new EnseignantResponse(Status.NOT_FOUND_OTHER_USER);
+    }
+
+    @Override
+    public EnseignantResponse deleteEnseignant(long id) {
+        var enseignantOptional=enseignantRepository.findById(id);
+        if (enseignantOptional.isPresent()){
+            enseignantRepository.deleteById(id);
+            return new EnseignantResponse(Status.OK);
+        }
+        return new EnseignantResponse(Status.KO);
+    }    
 }
 

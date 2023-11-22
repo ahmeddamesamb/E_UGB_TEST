@@ -7,5 +7,6 @@ import lombok.Getter;
 @Getter
 public enum Constants {
     ETUDIANT,
-    ENSEIGNANT
+    ENSEIGNANT,
+    INTERIMAIRE
 }
