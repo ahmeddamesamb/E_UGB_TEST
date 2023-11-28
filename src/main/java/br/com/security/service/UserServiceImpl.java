@@ -27,11 +27,9 @@ import static javax.swing.text.html.HTML.Tag.DD;
 @Service
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
-    private final ModelMapper modelMapper;
     private final PasswordEncoder passwordEncoder;
-    public UserServiceImpl(UserRepository userRepository, ModelMapper modelMapper, PasswordEncoder passwordEncoder) {
+    public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
-        this.modelMapper = modelMapper;
         this.passwordEncoder = passwordEncoder;
     }
 
@@ -51,7 +49,7 @@ public class UserServiceImpl implements UserService {
     public User updateUser(long id, User userRequest) {
 
         User user = userRepository
-            .findById((int) id)
+            .findById(id)
             .orElseThrow(() ->
                 new RuntimeException(
                     "La tentative de mise a jour du user na pas aboutit"
@@ -70,14 +68,14 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void deleteUser(long id) {
-        User user = userRepository.findById((int) id)
+        User user = userRepository.findById(id)
             .orElseThrow(() -> new ResourceNotFoundException("l'user que vous tenter de supprimer n existe pas"));
         userRepository.delete(user);
     }
 
     @Override
     public User getUserById(long id) {
-        Optional<User> result = userRepository.findById((int) id);
+        Optional<User> result = userRepository.findById(id);
         if (result.isPresent()) {
             return result.get();
         } else {

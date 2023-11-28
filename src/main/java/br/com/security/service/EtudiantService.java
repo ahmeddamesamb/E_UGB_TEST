@@ -10,7 +10,7 @@ public interface EtudiantService {
     List<Etudiant> getAllEtudiants();
     Etudiant getEtudiantById(long id);
     EtudiantResponse createEtudiant(Etudiant etudiant);
-    EtudiantResponse updateEtudiant(long id, Etudiant etudiant);
+    EtudiantResponse updateEtudiant(long id, EtudiantRequest etudiantRequest);
     EtudiantResponse deleteEtudiant(long id);
 
 }

@@ -7,7 +7,7 @@ import lombok.Getter;
 @Getter
 public enum Status {
 
-    OK(200, "SUCCESS"), 
+    OK(200, "Sucess"), 
     KO(400, "Echec"),
     UNAUTHORIZED(401, "Vous n'etes pas autorisé à acceder"),
     BAD_REQUEST(400, "Données incorrectes"),

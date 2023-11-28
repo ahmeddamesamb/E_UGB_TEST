@@ -1,16 +1,13 @@
-/*
 package br.com.security.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
 
 @Data
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -22,18 +19,28 @@ public class Universite {
     private Long id;
     @Column
     private String nomUniversite;
-    private List<Departement> departements;
-    private List<Enseignant> enseignantList;
     @Column
     private String coordonneesAdministration;
-    private List<ClubEtudiant> clubsEtudiants;
-    private List<Evenement> evenements;
+    @ManyToOne
+    @JoinColumn(name = "finances_id")
     private Finances finances;
+    @ManyToOne
+    @JoinColumn(name = "ressourcesHumaines_id")
     private RessourcesHumaines ressourcesHumaines;
+    @ManyToOne
+    @JoinColumn(name = "systemeMessagerie_id")
     private SystemeMessagerie systemeMessagerie;
-    @OneToMany(mappedBy = "universite")
+ 
+    @OneToMany(mappedBy = "universite",cascade = CascadeType.ALL,orphanRemoval = true)
     private List<Etudiant> etudiants;
-    @OneToMany(mappedBy = "universite")
+    @OneToMany(mappedBy = "universite",cascade = CascadeType.ALL,orphanRemoval = true)
     private List<Enseignant> enseignants;
+    @OneToMany(mappedBy = "universite",cascade = CascadeType.ALL,orphanRemoval = true)
+    private List<Evenement> evenements;
+    @OneToMany(mappedBy = "universite",cascade = CascadeType.ALL,orphanRemoval = true)
+    private List<ClubEtudiant> clubsEtudiants;
+    @OneToMany(mappedBy = "universite",cascade = CascadeType.ALL,orphanRemoval = true)
+    private List<Enseignant> enseignantList;
+    @OneToMany(mappedBy = "universite",cascade = CascadeType.ALL,orphanRemoval = true)
+    private List<Departement> departements;
 }
-*/

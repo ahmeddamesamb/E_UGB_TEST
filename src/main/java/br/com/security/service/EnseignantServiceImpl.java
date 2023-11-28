@@ -8,8 +8,10 @@ import br.com.security.payload.response.enseignant.EnseignantResponse;
 import br.com.security.payload.response.etudiant.EtudiantResponse;
 import br.com.security.repository.EnseignantRepository;
 import br.com.security.utils.ESpecialite;
+import br.com.security.utils.EStatus;
 import br.com.security.utils.Status;
 import br.com.security.utils.UtilsImpl;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -17,6 +19,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 @Service
+@Log4j2
 public class EnseignantServiceImpl implements EnseignantService{
     private final EnseignantRepository enseignantRepository;
     private final PasswordEncoder passwordEncoder;
@@ -65,23 +68,24 @@ public class EnseignantServiceImpl implements EnseignantService{
         nouvelEnseignant.setPassword(passwordEncoder.encode(enseignant.getPassword()));
         nouvelEnseignant.setIdentifiantEnseignant("E"+utils.generateCodePin());
         nouvelEnseignant.setESpecialite(ESpecialite.CYBERSECURITY);
-        enseignantRepository.save(enseignant);
+        nouvelEnseignant.setStatus(EStatus.DESACTIVE);
+        enseignantRepository.save(nouvelEnseignant);
         return new EnseignantResponse(Status.OK);
     }
 
     @Override
-    public EnseignantResponse updateEnseignant(long id, Enseignant enseignant) {
+    public EnseignantResponse updateEnseignant(long id, EnseignantRequest enseignantRequest) {
         var enseignantOptional = enseignantRepository.findById(id);
         if (enseignantOptional.isPresent()){
             var enseignantRes = enseignantOptional.get();
-            enseignantRes.setPrenom(enseignant.getPrenom());
-            enseignantRes.setNom(enseignant.getNom());
-            enseignantRes.setESpecialite(enseignant.getESpecialite());
+            enseignantRes.setPrenom(enseignantRequest.getPrenom());
+            enseignantRes.setNom(enseignantRequest.getNom());
             enseignantRes.setIdentifiantEnseignant(enseignantRes.getIdentifiantEnseignant());
-            enseignantRes.setTelephone(enseignant.getTelephone());
-            enseignantRes.setNaissance(enseignant.getNaissance());
-            enseignantRes.setERole(enseignant.getERole());
-            enseignantRes.setEmail(enseignant.getEmail());
+            enseignantRes.setTelephone(enseignantRequest.getTelephone());
+            enseignantRes.setNaissance(enseignantRequest.getNaissance());
+/*          enseignantRes.setERole(enseignantRequest.getERole());
+*/
+            enseignantRes.setEmail(enseignantRequest.getEmail());
             enseignantRepository.save(enseignantRes);
             return new EnseignantResponse(Status.OK);
         }

@@ -36,10 +36,7 @@ public class ApplicationConfig {
         authProvider.setPasswordEncoder(passwordEncoder());
         return authProvider;
     }
-    @Bean
-    public ModelMapper modelMapper() {
-        return new ModelMapper();
-    }
+ 
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
         return config.getAuthenticationManager();

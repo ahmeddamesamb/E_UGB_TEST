@@ -1,4 +1,3 @@
-/*
 package br.com.security.model;
 
 import jakarta.persistence.*;
@@ -25,5 +24,7 @@ public class RessourcesHumaines {
     @Column
     private List<String> rolesResponsabilites;
     @Column
-    private List<String> historiqueSalaires;}
-*/
+    private List<String> historiqueSalaires;
+    @OneToMany(mappedBy = "ressourcesHumaines",cascade = CascadeType.ALL,orphanRemoval = true)
+    private List<Universite> universiteList;
+}

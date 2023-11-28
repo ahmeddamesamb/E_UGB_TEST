@@ -1,4 +1,3 @@
-/*
 package br.com.security.model;
 
 import jakarta.persistence.*;
@@ -20,14 +19,16 @@ public class Remarque {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
     private Long id;
+    
     @Column
     private Etudiant etudiant;
-    @Column
+    @ManyToOne
+    @JoinColumn(name = "cours_id")
     private Cours cours;
     @Column
     private double notesObtenues;
     @Column
+    @Temporal(TemporalType.DATE)
     private Date dateEvaluation;
 
 }
-*/

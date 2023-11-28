@@ -2,20 +2,16 @@ package br.com.security.service;
 
 import br.com.security.model.ERole;
 import br.com.security.model.Etudiant;
-import br.com.security.model.Passager;
 import br.com.security.payload.request.etudiant.EtudiantRequest;
 import br.com.security.payload.response.etudiant.EtudiantResponse;
 import br.com.security.repository.EtudiantRepository;
+import br.com.security.utils.EStatus;
 import br.com.security.utils.Status;
 import br.com.security.utils.UtilsImpl;
-import lombok.extern.log4j.Log4j2;
-import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class EtudiantServiceImpl implements EtudiantService{
@@ -33,6 +29,7 @@ public class EtudiantServiceImpl implements EtudiantService{
     public List<Etudiant> getAllEtudiants() {
         return etudiantRepository.findAll();
     }
+    
     @Override
     public Etudiant getEtudiantById(long id) {
         var etudiantOptional= etudiantRepository.findById(id);
@@ -45,7 +42,7 @@ public class EtudiantServiceImpl implements EtudiantService{
                 etudiant.getNom(),
                 etudiant.getEmail(),
                 etudiant.getTelephone(),
-                etudiant.getStatut(),
+                etudiant.getStatus(),
                 etudiant.getNaissance(),
                 etudiant.getERole());
         }
@@ -63,24 +60,25 @@ public class EtudiantServiceImpl implements EtudiantService{
         nouvelEtudiant.setTelephone(etudiant.getTelephone());
         nouvelEtudiant.setPassword(passwordEncoder.encode(etudiant.getPassword()));
         nouvelEtudiant.setIdentifiantEtudiant("P"+utils.generateCodePin());
-        nouvelEtudiant.setStatut("ACTIF");
-        etudiantRepository.save(etudiant);
+        nouvelEtudiant.setStatus(EStatus.DESACTIVE);
+        etudiantRepository.save(nouvelEtudiant);
         return new EtudiantResponse(Status.OK);
     }
 
     @Override
-    public EtudiantResponse updateEtudiant(long id, Etudiant etudiant) {
+    public EtudiantResponse updateEtudiant(long id, EtudiantRequest etudiantRequest) {
     var etudiantOptional = etudiantRepository.findById(id);
     if (etudiantOptional.isPresent()){
         var etudiantRes = etudiantOptional.get();
-        etudiantRes.setPrenom(etudiant.getPrenom());
-        etudiantRes.setNom(etudiant.getNom());
-        etudiantRes.setStatut(etudiant.getStatut());
-        etudiantRes.setIdentifiantEtudiant(etudiantRes.getIdentifiantEtudiant());
-        etudiantRes.setTelephone(etudiant.getTelephone());
-        etudiantRes.setNaissance(etudiant.getNaissance());
-        etudiantRes.setERole(etudiant.getERole());
-        etudiantRes.setEmail(etudiant.getEmail());
+        etudiantRes.setPrenom(etudiantRequest.getPrenom());
+        etudiantRes.setNom(etudiantRequest.getNom());
+        etudiantRes.setIdentifiantEtudiant(etudiantRequest.getIdentifiantEtudiant());
+        etudiantRes.setTelephone(etudiantRequest.getTelephone());
+        etudiantRes.setNaissance(etudiantRequest.getNaissance());
+/*
+        etudiantRes.setERole(etudiantRequest.getERole());
+*/
+        etudiantRes.setEmail(etudiantRequest.getEmail());
         etudiantRepository.save(etudiantRes);
         return new EtudiantResponse(Status.OK);
     }

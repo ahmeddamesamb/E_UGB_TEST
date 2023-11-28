@@ -11,7 +11,7 @@ public interface EnseignantService {
     List<Enseignant> getAllEnseignants();
     Enseignant getEnseignantById(long id);
     EnseignantResponse createEnseignant(Enseignant enseignant);
-    EnseignantResponse updateEnseignant(long id, Enseignant enseignant);
+    EnseignantResponse updateEnseignant(long id, EnseignantRequest enseignantRequest);
     EnseignantResponse deleteEnseignant(long id);
 
     

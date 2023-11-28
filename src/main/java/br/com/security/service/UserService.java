@@ -1,6 +1,5 @@
 package br.com.security.service;
 
-import br.com.security.model.Reservation;
 import br.com.security.model.User;
 
 import java.util.List;

@@ -1,4 +1,3 @@
-/*
 package br.com.security.model;
 
 import jakarta.persistence.*;
@@ -10,7 +9,6 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 
 @Data
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -25,5 +23,7 @@ public class SystemeMessagerie {
     @Column
     private List<String> messagesProfesseurs;
     @Column
-    private List<String> messagesAdministration;}
-*/
+    private List<String> messagesAdministration;
+    @OneToMany(mappedBy = "systemeMessagerie",cascade = CascadeType.ALL,orphanRemoval = true)
+    private List<Universite> universiteList;
+}

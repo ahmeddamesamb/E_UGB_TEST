@@ -1,4 +1,3 @@
-/*
 package br.com.security.model;
 
 import jakarta.persistence.*;
@@ -28,5 +27,7 @@ public class ClubEtudiant {
     private List<String> evenementsOrganises;
     @Column
     private double budgetClub;
+    @ManyToOne
+    @JoinColumn(name = "universite_id")
+    private Universite universite;
 }
-*/

@@ -22,17 +22,21 @@ public class Cours {
     private String nomCours;
     @Column
     private String codeCours;
-    
-    private List<Etudiant> etudiantsInscrits=new ArrayList<>();
- 
     @Column
     private String horaireCours;
     @Column
     private String salleClasse;
-
-
+    
+    @OneToMany(mappedBy = "cours")
+    private List<Etudiant> etudiantList;
+    @OneToMany(mappedBy = "cours")
+    private List<Inscription> inscriptionList;
+    @OneToMany(mappedBy = "cours")
+    private List<Remarque> remarqueList;
     @ManyToOne
     @JoinColumn(name = "enseignant_id")
     private Enseignant enseignant;
-
+    @ManyToOne
+    @JoinColumn(name = "departement_id")
+    private Departement departement;
 }

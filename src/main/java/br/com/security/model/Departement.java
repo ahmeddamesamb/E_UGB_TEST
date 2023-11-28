@@ -1,4 +1,3 @@
-/*
 package br.com.security.model;
 
 import jakarta.persistence.*;
@@ -22,13 +21,16 @@ public class Departement {
     private Long id;
     @Column
     private String nomDepartement;
-    @Column
-    private List<Cours> coursOfferts;
-    @Column
+    @OneToMany(mappedBy = "departement")
+    private List<Cours> coursEnseignes;
+    @OneToMany(mappedBy = "departement")
     private List<Enseignant> enseignantDepartement;
+    
     @Column
     private String coordonneesChefDepartement;
-
+    
+    @ManyToOne
+    @JoinColumn(name = "universite_id")
+    private Universite universite;
 
 }
-*/

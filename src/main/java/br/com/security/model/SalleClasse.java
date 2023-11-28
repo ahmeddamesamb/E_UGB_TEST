@@ -1,4 +1,3 @@
-/*
 package br.com.security.model;
 
 import jakarta.persistence.*;
@@ -24,7 +23,9 @@ public class SalleClasse  {
     private int capacite;
     @Column
     private String equipementsDisponibles;
+    @ManyToOne
+    @JoinColumn(name = "emploieInterim_id")
+    private EmploieDuTemps emploieDuTemps;
 
 
 }
-*/

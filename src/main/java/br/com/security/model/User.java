@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
+import br.com.security.utils.EStatus;
 import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -25,7 +26,7 @@ import lombok.NoArgsConstructor;
 
 public class User implements UserDetails  {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @Column
     private String telephone;
@@ -34,21 +35,17 @@ public class User implements UserDetails  {
     @Column
     private String prenom;
     @Column
+    @Temporal(TemporalType.DATE)
     private Date naissance;
+    @Enumerated(EnumType.STRING)
+    private EStatus status;
     @Column
     private String email;
     @Column
     private String password;
     @Enumerated(EnumType.STRING)
     private ERole ERole;
-    @OneToMany(
-        mappedBy = "user",
-        cascade = CascadeType.ALL,
-        orphanRemoval = true
-    )
-    private List<Reservation> reservationList=new ArrayList<>();
-  
-
+    
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority(ERole.name()));
