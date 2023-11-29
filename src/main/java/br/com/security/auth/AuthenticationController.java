@@ -1,5 +1,6 @@
 package br.com.security.auth;
 
+import br.com.security.payload.response.authentification.AuthenticationResponse;
 import br.com.security.utils.Endpoints;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
