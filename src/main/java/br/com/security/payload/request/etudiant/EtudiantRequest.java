@@ -1,15 +1,12 @@
 package br.com.security.payload.request.etudiant;
 
-import br.com.security.model.ERole;
-import br.com.security.payload.request.RegisterRequest;
-import br.com.security.utils.EStatus;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 import java.util.Date;
 import java.util.List;
+
+import br.com.security.model.ERole;
+import br.com.security.utils.EStatus;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor

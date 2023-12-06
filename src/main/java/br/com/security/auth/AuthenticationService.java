@@ -6,7 +6,6 @@ import br.com.security.model.User;
 import br.com.security.payload.response.authentification.AuthenticationResponse;
 import br.com.security.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.log4j.Log4j2;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -14,7 +13,6 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-@Log4j2
 public class AuthenticationService {
 
     private final UserRepository userRepository;

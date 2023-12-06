@@ -1,11 +1,10 @@
 package br.com.security.service;
 
+import java.util.List;
+
 import br.com.security.model.Enseignant;
-import br.com.security.model.Etudiant;
 import br.com.security.payload.request.enseignant.EnseignantRequest;
 import br.com.security.payload.response.enseignant.EnseignantResponse;
-
-import java.util.List;
 
 public interface EnseignantService {
     List<Enseignant> getAllEnseignants();

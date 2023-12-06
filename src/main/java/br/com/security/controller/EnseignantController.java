@@ -1,10 +1,8 @@
 package br.com.security.controller;
 
 import br.com.security.model.Enseignant;
-import br.com.security.model.Etudiant;
 import br.com.security.payload.request.enseignant.EnseignantRequest;
 import br.com.security.payload.response.enseignant.EnseignantResponse;
-import br.com.security.payload.response.etudiant.EtudiantResponse;
 import br.com.security.service.EnseignantService;
 import br.com.security.utils.Endpoints;
 import org.springframework.web.bind.annotation.*;

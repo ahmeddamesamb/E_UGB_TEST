@@ -6,7 +6,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -18,7 +17,8 @@ import java.util.List;
 public class Cours {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", nullable = false)
+    private Long id;
+    @Column
     private String nomCours;
     @Column
     private String codeCours;

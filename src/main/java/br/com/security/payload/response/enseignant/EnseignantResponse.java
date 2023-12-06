@@ -1,8 +1,9 @@
 package br.com.security.payload.response.enseignant;
 
-import br.com.security.model.User;
 import br.com.security.utils.Status;
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter

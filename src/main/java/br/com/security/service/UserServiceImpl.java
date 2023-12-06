@@ -1,29 +1,16 @@
 package br.com.security.service;
 
-import br.com.security.model.ERole;
-import br.com.security.model.User;
-import br.com.security.repository.UserRepository;
-import lombok.extern.log4j.Log4j;
-import lombok.extern.log4j.Log4j2;
-import org.modelmapper.ModelMapper;
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import javax.swing.text.DateFormatter;
-import java.text.DateFormat;
-import java.time.Year;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
-import java.util.Optional;
+import br.com.security.model.ERole;
+import br.com.security.model.User;
+import br.com.security.repository.UserRepository;
 
-import static javax.print.attribute.Size2DSyntax.MM;
-import static javax.swing.text.html.HTML.Tag.DD;
-
-@Log4j2
 @Service
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;

@@ -1,25 +1,20 @@
 package br.com.security.service;
 
+import java.util.List;
+
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+
 import br.com.security.model.ERole;
 import br.com.security.model.Enseignant;
-import br.com.security.model.Etudiant;
 import br.com.security.payload.request.enseignant.EnseignantRequest;
 import br.com.security.payload.response.enseignant.EnseignantResponse;
-import br.com.security.payload.response.etudiant.EtudiantResponse;
 import br.com.security.repository.EnseignantRepository;
 import br.com.security.utils.ESpecialite;
 import br.com.security.utils.EStatus;
 import br.com.security.utils.Status;
 import br.com.security.utils.UtilsImpl;
-import lombok.extern.log4j.Log4j2;
-import org.springframework.data.rest.webmvc.ResourceNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.Optional;
 @Service
-@Log4j2
 public class EnseignantServiceImpl implements EnseignantService{
     private final EnseignantRepository enseignantRepository;
     private final PasswordEncoder passwordEncoder;

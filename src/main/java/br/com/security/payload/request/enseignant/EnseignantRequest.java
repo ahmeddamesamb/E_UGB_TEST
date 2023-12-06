@@ -1,13 +1,8 @@
 package br.com.security.payload.request.enseignant;
 
 import br.com.security.model.ERole;
-import br.com.security.payload.request.RegisterRequest;
 import br.com.security.utils.ESpecialite;
 import br.com.security.utils.EStatus;
-import jakarta.persistence.Column;
-
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

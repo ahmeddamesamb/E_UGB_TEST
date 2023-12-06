@@ -1,13 +1,10 @@
 package br.com.security.service;
 
-import br.com.security.model.ClubEtudiant;
-import br.com.security.model.Cours;
-import br.com.security.payload.request.ClubEtudiant.ClubEtudiantRequest;
-import br.com.security.payload.request.Cours.CoursRequest;
-import br.com.security.payload.response.ClubEtudiant.ClubEtudiantResponse;
-import br.com.security.payload.response.Cours.CoursResponse;
-
 import java.util.List;
+
+import br.com.security.model.Cours;
+import br.com.security.payload.request.Cours.CoursRequest;
+import br.com.security.payload.response.Cours.CoursResponse;
 
 public interface CoursService {
     List<Cours> getAllCours();
